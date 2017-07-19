@@ -6,13 +6,16 @@ import re
 main_page_head = '''
 <head>
     <meta charset="utf-8">
-    <title>Fresh Tomatoes!</title>
+    <title>Favorites Movies</title>
 
     <!-- Bootstrap 3 -->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+
     <style type="text/css" media="screen">
         body {
             padding-top: 80px;
@@ -78,6 +81,7 @@ main_page_head = '''
             $(this).next("div").show("fast", showNext);
           });
         });
+
     </script>
 </head>
 '''
@@ -99,13 +103,13 @@ main_page_content = '''
         </div>
       </div>
     </div>
-    
+
     <!-- Main Page Content -->
     <div class="container">
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">Fresh Tomatoes Movie Trailers</a>
+            <a class="navbar-brand" href="#">My favorite movies</a>
           </div>
         </div>
       </div>
@@ -113,6 +117,7 @@ main_page_content = '''
     <div class="container">
       {movie_tiles}
     </div>
+
   </body>
 </html>
 '''
