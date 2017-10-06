@@ -2,12 +2,13 @@
 #
 # A *bookmark server* or URI shortener.
 
+import threading
 import http.server
 import requests
-from urllib.parse import unquote, parse_qs
 
-import threading
+from urllib.parse import unquote, parse_qs
 from socketserver import ThreadingMixIn
+
 
 class ThreadHTTPServer(ThreadingMixIn, http.server.HTTPServer):
     "This is an HTTPServer that supports thread-based concurrency."
@@ -112,6 +113,7 @@ class Shortener(http.server.BaseHTTPRequestHandler):
                 "Couldn't fetch URI '{}'. Sorry!".format(longuri).encode())
 
 if __name__ == '__main__':
-    server_address = ('PORT', 8000)
+    port = int(os.environ.get('PORT', 8000))
+    server_address = ('', port)
     httpd = ThreadHTTPServer(server_address, Shortener)
     httpd.serve_forever()
