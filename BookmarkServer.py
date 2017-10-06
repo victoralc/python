@@ -3,6 +3,7 @@
 # A *bookmark server* or URI shortener.
 
 import threading
+import os
 import http.server
 import requests
 
