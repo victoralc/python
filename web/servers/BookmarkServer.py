@@ -1,7 +1,3 @@
-#!/usr/bin/env python3
-#
-# A *bookmark server* or URI shortener.
-
 import http.server
 import requests
 from urllib.parse import unquote, parse_qs
@@ -49,7 +45,6 @@ def CheckURI(uri, timeout=5):
         # If the GET request raised an exception, it's not OK.
         return False
 
-
 class Shortener(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
         # A GET request will either be for / (the root path) or for /some-name.
@@ -58,9 +53,9 @@ class Shortener(http.server.BaseHTTPRequestHandler):
 
         if name:
             if name in memory:
-                # We know that name! Send a redirect to it.
-                self.send_response(303)
-                self.send_header('Location', memory[name])
+                # 2. Send a 303 redirect to the long URI in memory[name].
+                self.send_response(303) 
+                self.send_header('Location', memory['name'])
                 self.end_headers()
             else:
                 # We don't know that name! Send a 404 error.
@@ -99,8 +94,8 @@ class Shortener(http.server.BaseHTTPRequestHandler):
             # This URI is good!  Remember it under the specified name.
             memory[shortname] = longuri
 
-            # Serve a redirect to the form.
-            self.send_response(303)
+            # 4. Serve a redirect to the root page (the form).
+            self.send_response(303) 
             self.send_header('Location', '/')
             self.end_headers()
         else:
@@ -111,7 +106,14 @@ class Shortener(http.server.BaseHTTPRequestHandler):
             self.wfile.write(
                 "Couldn't fetch URI '{}'. Sorry!".format(longuri).encode())
 
+            # 5. Send a 404 error with a useful message.
+            self.send_response(404)
+            self.send_header('Content-type', 'text/plain; charset=utf-8')
+            self.end_headers()
+            self.wfile.write('URI not found')
+            
+
 if __name__ == '__main__':
-    server_address = ('PORT', 8000)
+    server_address = ('', 8000)
     httpd = http.server.HTTPServer(server_address, Shortener)
     httpd.serve_forever()
