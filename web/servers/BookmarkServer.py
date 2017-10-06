@@ -6,6 +6,12 @@ import http.server
 import requests
 from urllib.parse import unquote, parse_qs
 
+import threading
+from socketserver import ThreadingMixIn
+
+class ThreadHTTPServer(ThreadingMixIn, http.server.HTTPServer):
+    "This is an HTTPServer that supports thread-based concurrency."
+
 memory = {}
 
 form = '''<!DOCTYPE html>
