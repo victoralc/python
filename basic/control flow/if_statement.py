@@ -47,15 +47,18 @@ message = "Somebody who is {} years old will pay ${} to ride the bus.".format(ag
 print(message)
 
 points = 174  # use this input when submitting your answer
-
+prize = ""
 if points <= 50:
-    result = "Congratulations! You won a wooden rabbit!"
+    prize = "wooden rabbit"
+    result = "Congratulations! You won a {}!".format(prize)
 elif points <= 150:
     result = "Oh dear, no prize this time."
 elif points <= 180:
-    result = "Congratulations! You won a wafer-thin mint!"
+    prize = "wafer-thin mint"
+    result = "Congratulations! You won a {}!".format(prize)
 else:
-    result = "Congratulations! You won a penguin!"
+    prize = "penguin"
+    result = "Congratulations! You won a {}!".format(prize)
 
 print(result)
   
