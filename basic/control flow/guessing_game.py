@@ -1,17 +1,18 @@
-answer = 5
+import random
 
-print('Please guess number between 1 and 10')
-guess = int(input())
+highest = 10
+answer = random.randint(1, highest)
+print(answer)  # TODO: Remove after testing
+guess = 0  # Initialise to any number that doesn't equal the answer
+print('Please guess number between 1 and {}'.format(highest))
 
-if guess == answer:
-    print("You got it first time")
-else:
-    if guess < answer:
-        print('Please guess higher')
-    else:  # guess must be greater than answer
-        print("Please guess lower")
+while guess != answer:
     guess = int(input())
     if guess == answer:
         print("Well done, you guessed correctly")
+        break
     else:
-        print("Sorry, you have not guessed correctly")
+        if guess < answer:
+            print('Please guess higher')
+        else:  # guess must be greater than answer
+            print("Please guess lower")
